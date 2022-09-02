@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "5_1.h"
+#include "BinaryTree_library.h"
 #define MAX_LEN 80
-int max =0;
+
 /*int recursion(int n)
 {
     if ( n== 1)
