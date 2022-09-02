@@ -41,44 +41,37 @@ void Average(TreeType t, int n)
     }
 }
 
-void Rising_day(TreeType t)
-{
-    if (t != NULL)
-    {
-        Rising_day(t->left);
-        int tmp_max =0;
+void risingDay (int *max, TreeType t){
+    if (t != NULL){
+        risingDay(max,t->left);
         int i;
-        for (i=0;i<10;i++)
-        {
-            if (t->data.gia_dong[i] > t->data.gia_mo[i])
-            {
-                tmp_max++;
+        int tmp_max=0;
+        for (i =0;i<10;i++){
+            if(t->data.gia_dong[i] > t->data.gia_mo[i]){
+                tmp_max ++;
             }
         }
-        if (tmp_max > max) max = tmp_max;
-        Rising_day(t->right);
+        if(tmp_max > (*max)){
+        (*max)= tmp_max;
+        }
+        risingDay(max,t->right);
     }
 }
-
-void maCP_max(TreeType t)
-{
-    if (t!= NULL)
-    {
-        maCP_max(t->left);
-        int i ;
-        int tmp_max =0;
-        for (i=0;i<10;i++)
-        {
-            if (t->data.gia_dong[i] > t->data.gia_mo[i])
-            {
-                tmp_max++;
+void maCP_max(int max, TreeType t){
+    if (t!= NULL){
+        maCP_max(max,t->left);
+        int i;
+        int tmp_max=0;
+        for (i =0;i<10;i++){
+            if(t->data.gia_dong[i] > t->data.gia_mo[i]){
+                tmp_max ++;
             }
         }
-        if (tmp_max == max)
-        {
-            printf("%-16s%-16d\n",t->data.maCP,tmp_max);
+        
+        if(tmp_max == max){
+            printf("%s\t%d\n",t->data.maCP,max);
         }
-        maCP_max(t->right); 
+        maCP_max(max,t->right);
     }
 }
 void Find_max_min(TreeType t)
@@ -105,7 +98,7 @@ int main()
     
     int m =0;
     TreeType t;
-                    
+    int max =0;              
     int N;
     makenullTree(&t);
     while (m !=5)
@@ -215,11 +208,11 @@ int main()
             }
             case 4:
             {
-                Rising_day(t);
-                printf("So ngay tang:%d\n",max);
-                printf("Cac ma co so ngay tang lon nhat:\n");
-                printf("%-16s%-16s\n","Ma CP","Ngay tang");
-                maCP_max(t);
+                risingDay(&max,t);
+                printf("So ngay tang nhieu nhat:%d\n",max);
+                printf("Nhung ma co cung so ngay tang:\n");
+                printf("%-16s%-16s\n","Ma CP","Ngay Tang");
+                maCP_max(max,t);
 
                 break;
             }
